@@ -58,28 +58,69 @@ const runners = [
 // ==== Challenge 1: Use .forEach() ====
 // The event director needs both the first and last names of each runner for their running bibs. Combine both the first and last names and populate a new array called `fullNames`. This array will contain just strings.
 let fullNames = [];
+runners.forEach(cur => {
+  const name = `${cur.first_name} ${cur.last_name}`;
+  fullNames.push(name);
+})
 console.log(fullNames);
 
 // ==== Challenge 2: Use .map() ====
 // The event director needs to have all the runners' first names in uppercase because the director BECAME DRUNK WITH POWER. Populate an array called `firstNamesAllCaps`. This array will contain just strings.
-let firstNamesAllCaps = [];
+//let firstNamesAllCaps = [];
+const firstNamesAllCaps = runners.map( cur => 
+  cur.first_name.toUpperCase())
+
 console.log(firstNamesAllCaps);
 
 // ==== Challenge 3: Use .filter() ====
 // The large shirts won't be available for the event due to an ordering issue. We need a filtered version of the runners array, containing only those runners with large sized shirts so they can choose a different size. This will be an array of objects.
 let runnersLargeSizeShirt = [];
+runnersLargeSizeShirt = runners.filter(cur => cur.shirt_size = 'L')
+
 console.log(runnersLargeSizeShirt);
+
 
 // ==== Challenge 4: Use .reduce() ====
 // The donations need to be tallied up and reported for tax purposes. Add up all the donations and save the total into a ticketPriceTotal variable.
 let ticketPriceTotal = 0;
+
+ticketPriceTotal = runners.reduce((accu, cur) => 
+  accu + cur.donation
+,0)
+
 console.log(ticketPriceTotal);
 
 // ==== Challenge 5: Be Creative ====
 // Now that you have used .forEach(), .map(), .filter(), and .reduce().  I want you to think of potential problems you could solve given the data set and the 5k fun run theme.  Try to create and then solve 3 unique problems using one or many of the array methods listed above.
 
-// Problem 1
+// Problem 1   create an array with donation size over 200
+const largeDonation = runners.filter( cur => cur.donation > 200);
+console.log(largeDonation);
 
-// Problem 2
+// Problem 2 create an array with last-name, email, company_name 
+let newRunners = [];
+runners.forEach( cur => {
+   const data = {
+     last_name: cur.last_name,
+     email: cur.email,
+     company_name: cur.company_name
+   }
+   newRunners.push(data);
+})
 
-// Problem 3
+console.log(newRunners);
+
+
+// Problem 3   rearrange the list from problem 2 in last_name's acesending order
+
+
+for (let i = 0; i < newRunners.length; i++) {
+  for (let j = i + 1; j < newRunners.length; j++){
+    if (newRunners[i].last_name > newRunners[j].last_name){
+      const temp = newRunners[j].last_name;
+      newRunners[j].last_name = newRunners[i].last_name;
+      newRunners[i].last_name = temp;
+    }
+  }
+}
+console.log(newRunners);
